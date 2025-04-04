@@ -2,18 +2,18 @@ locals {
   environment = basename(path.cwd)
 }
 
-module "naming" {
-  source      = "../../modules/naming"
+module "tags" {
+  source      = "../../modules/tags"
   name        = "blob"
   project     = "acme"
   environment = local.environment
   extra_tags = {
     Owner = "infra-team"
-    BU = "k8s"
+    BU = "accounting"
   }
 }
 
-module "az_blob" {
-  source  = "../../modules/az_blob"
-  context = module.naming.context
+module "az-blob" {
+  source  = "../../modules/az-blob"
+  context = module.tags.context
 }
